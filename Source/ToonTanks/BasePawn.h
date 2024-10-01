@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "BasePawn.generated.h"
 
+using namespace UP;
+
 UCLASS()
 class TOONTANKS_API ABasePawn : public APawn
 {
@@ -20,12 +22,14 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BasePawn", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleComp;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BasePawn", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BasePawn", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* TurretMesh;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "BasePawn", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* ProjectileSpawnPoint;
 
 public:
 	// Called every frame
