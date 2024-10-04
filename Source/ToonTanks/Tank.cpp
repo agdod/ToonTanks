@@ -8,6 +8,7 @@
 #include "Components/InputComponent.h"
 #include "Camera/CameraComponent.h"
 #include <GameFramework/SpringArmComponent.h>
+#include <Kismet/GameplayStatics.h>
 
 ATank::ATank()
 {
@@ -22,17 +23,15 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	if (UEnhancedInputComponent* EnhancedInput = 
+	if (UEnhancedInputComponent* EnhancedInput =
 		CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Move
-		EnhancedInput->BindAction(MoveAction,ETriggerEvent::Triggered,this, &ATank::Move);
+		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::Move);
 		// Rotate Turret
-
-		//
+		EnhancedInput->BindAction(RotateTurretAction, ETriggerEvent::Triggered, this, &ATank::RotateTurret);
+		// Fire Projectile
 	}
-
-	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 }
 
 void ATank::BeginPlay()
@@ -50,13 +49,30 @@ void ATank::BeginPlay()
 
 void ATank::Move(const FInputActionValue& Value)
 {
-	const float DirectionValue = Value.Get<float>();
+	const FVector2D MoveValue = Value.Get<FVector2D>();
+	//const float DirectionValue = Value.Get<float>();
 
-	if (Controller && (DirectionValue != 0.f))
+	if (Controller && (MoveValue != FVector2D::ZeroVector))
 	{
-		FVector DeltaLocation(0.f);
-		DeltaLocation.X = DirectionValue;
-		AddActorLocalOffset(DeltaLocation);
+		FVector DeltaLocation = FVector::ZeroVector;
+		const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+		// X = Value * DeltaTime * Speed
+
+		DeltaLocation.X = MoveValue.X * DeltaTime * Speed;
+		AddActorLocalOffset(DeltaLocation, true);
+
+		FRotator DeltaRotation = FRotator::ZeroRotator;
+		DeltaRotation.Yaw = MoveValue.Y * TurnRate * DeltaTime;
+		AddActorLocalRotation(DeltaRotation, true);
 	}
-	
+
+}
+
+void ATank::RotateTurret(const FInputActionValue& Value)
+{
+	const float TurnValue = Value.Get<float>();
+	if (Controller && (TurnValue != 0.f))
+	{
+
+	}
 }

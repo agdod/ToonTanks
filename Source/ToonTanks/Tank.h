@@ -36,6 +36,11 @@ private:
 	class USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, Category = Components)
 	class UCameraComponent* CameraComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	float Speed{ 250.f };
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	float TurnRate{ 100.f };
 
 	void Move(const FInputActionValue& Value);
+	void RotateTurret(const FInputActionValue& Value);
 };
