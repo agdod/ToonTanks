@@ -4,6 +4,8 @@
 #include "Tank.h"
 
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
+#include "Components/InputComponent.h"
 #include "Camera/CameraComponent.h"
 #include <GameFramework/SpringArmComponent.h>
 
@@ -20,7 +22,15 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	//UEnhancedInputComponent* Input = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
+	if (UEnhancedInputComponent* EnhancedInput = 
+		CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		// Move
+		EnhancedInput->BindAction(MoveAction,ETriggerEvent::Triggered,this, &ATank::Move);
+		// Rotate Turret
+
+		//
+	}
 
 	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 }
@@ -28,7 +38,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	if (const APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
 			ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
@@ -40,9 +50,13 @@ void ATank::BeginPlay()
 
 void ATank::Move(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Value: , %f"), Value);
+	const float DirectionValue = Value.Get<float>();
 
-	FVector DeltaLocation(0.f);
-	//DeltaLocation.X = Value;
-	AddActorLocalOffset(DeltaLocation);
+	if (Controller && (DirectionValue != 0.f))
+	{
+		FVector DeltaLocation(0.f);
+		DeltaLocation.X = DirectionValue;
+		AddActorLocalOffset(DeltaLocation);
+	}
+	
 }
