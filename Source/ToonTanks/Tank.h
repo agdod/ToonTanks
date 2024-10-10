@@ -48,4 +48,5 @@ private:
 
 	void Move(const FInputActionValue& Value);
 	void RotateTurret(const FInputActionValue& Value);
+	virtual void Fire() override;
 };
