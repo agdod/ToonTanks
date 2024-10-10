@@ -33,6 +33,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		// Rotate Turret
 		EnhancedInput->BindAction(RotateTurretAction, ETriggerEvent::Triggered, this, &ATank::RotateTurret);
 		// Fire Projectile
+		EnhancedInput->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATank::Fire);
 	}
 }
 
@@ -47,14 +48,6 @@ void ATank::Tick(float DeltaTime)
 			ECollisionChannel::ECC_Visibility,
 			false,
 			HitResult);
-
-		DrawDebugSphere(
-			GetWorld(),
-			HitResult.ImpactPoint,
-			25.f,
-			12.f,
-			FColor::Red
-		);
 
 		ABasePawn::RotateTurret(HitResult.ImpactPoint);
 	}
@@ -102,4 +95,10 @@ void ATank::RotateTurret(const FInputActionValue& Value)
 	{
 
 	}
+}
+
+void ATank::Fire()
+{
+	Super::Fire();
+
 }
