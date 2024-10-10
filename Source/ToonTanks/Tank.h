@@ -19,6 +19,9 @@ public:
 	ATank();
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -32,14 +35,16 @@ protected:
 	UInputAction* FireAction;
 
 private:
-	UPROPERTY(VisibleAnywhere, Category = Components)
+	UPROPERTY(VisibleAnywhere, Category = CustomComponents)
 	class USpringArmComponent* SpringArm;
-	UPROPERTY(VisibleAnywhere, Category = Components)
+	UPROPERTY(VisibleAnywhere, Category = CustomComponents)
 	class UCameraComponent* CameraComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	float Speed{ 250.f };
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	float TurnRate{ 100.f };
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	APlayerController* PlayerController;
 
 	void Move(const FInputActionValue& Value);
 	void RotateTurret(const FInputActionValue& Value);
