@@ -27,13 +27,14 @@ protected:
 	USceneComponent* ProjectileSpawnPoint;
 
 private:
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = CustomComponents, meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleComp;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = CustomComponents, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = CustomComponents, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* TurretMesh;
+	UPROPERTY(EditDefaultsOnly, Category = Combat)
+	TSubclassOf<class AProjectile> ProjectileClass;
 
 public:
 };

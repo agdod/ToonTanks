@@ -10,6 +10,7 @@
 #include <GameFramework/SpringArmComponent.h>
 #include <Kismet/GameplayStatics.h>
 
+#include "Projectile.h"
 #include "Engine/LocalPlayer.h"
 
 ATank::ATank()
@@ -100,5 +101,4 @@ void ATank::RotateTurret(const FInputActionValue& Value)
 void ATank::Fire()
 {
 	Super::Fire();
-
 }
