@@ -22,6 +22,9 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UProjectileMovementComponent* ProjectileMovement;
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse,
+	           const FHitResult& Hit);
 
 public:
 	// Called every frame
