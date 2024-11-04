@@ -15,12 +15,13 @@ class TOONTANKS_API ATank : public ABasePawn
 	GENERATED_BODY()
 
 public:
-
 	ATank();
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void HandleDestruction() override;
+	APlayerController* GetPlayerController() const { return PlayerController; }
 
 protected:
 	virtual void BeginPlay() override;
@@ -40,9 +41,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = CustomComponents)
 	class UCameraComponent* CameraComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	float Speed{ 250.f };
+	float Speed{250.f};
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	float TurnRate{ 100.f };
+	float TurnRate{100.f};
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	APlayerController* PlayerController;
 

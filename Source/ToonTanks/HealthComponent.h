@@ -25,6 +25,8 @@ private:
 	void DamageTaken(AActor* DamagedActor, float Damage, const class UDamageType* DamageType,
 	                 class AController* Instigator, AActor* DamageCauser);
 
+	class AToonTanksGameMode* ToonTanksGameMode;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

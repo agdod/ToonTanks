@@ -34,8 +34,6 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 
 	AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
 	UClass* DamageTypeClass = UDamageType::StaticClass();
-	UE_LOG(LogTemp, Display, TEXT("Projectile Hit"));
-	UE_LOG(LogTemp, Display, TEXT("OtherActor : %s"), *OtherActor->GetName());
 	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, this, DamageTypeClass);

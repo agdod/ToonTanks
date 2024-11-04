@@ -54,6 +54,14 @@ void ATank::Tick(float DeltaTime)
 	}
 }
 
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	UE_LOG(LogTemp, Display, TEXT("ATank::HandleDestruction"));
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
@@ -86,7 +94,6 @@ void ATank::Move(const FInputActionValue& Value)
 		DeltaRotation.Yaw = MoveValue.Y * TurnRate * DeltaTime;
 		AddActorLocalRotation(DeltaRotation, true);
 	}
-
 }
 
 void ATank::RotateTurret(const FInputActionValue& Value)
@@ -94,7 +101,6 @@ void ATank::RotateTurret(const FInputActionValue& Value)
 	const float TurnValue = Value.Get<float>();
 	if (Controller && (TurnValue != 0.f))
 	{
-
 	}
 }
 

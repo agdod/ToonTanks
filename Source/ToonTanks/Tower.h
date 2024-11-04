@@ -16,17 +16,18 @@ class TOONTANKS_API ATower : public ABasePawn
 
 public:
 	virtual void Tick(float DeltaTime) override;
+	virtual void HandleDestruction() override;
 
 protected:
 	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = TowerStats, meta = (AllowPrivateAccess = "true"))
-	float FireRange{ 300.f };
-	bool InRange{ false };
+	float FireRange{300.f};
+	bool InRange{false};
 	class ATank* Tank;
 	FTimerHandle FireRateTimeHandle;
-	float FireRate{ 2.f };
+	float FireRate{2.f};
 	void CheckFireCondition();
 	bool InFireRange();
 };
