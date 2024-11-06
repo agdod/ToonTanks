@@ -27,7 +27,11 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandleDestruction()
 {
-	// TODO : Handle visual sound effects.
+	// TODO : Handle sound effects.
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticles, GetActorLocation(), GetActorRotation() +);
+	}
 }
 
 // Called when the game starts or when spawned
