@@ -35,6 +35,11 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Combat", meta=(AllowPrivateAccess=true))
 	class UParticleSystemComponent* SmokeParticleComponent;
 
+	UPROPERTY(EditAnywhere, Category = "Combat", meta=(AllowPrivateAccess=true))
+	class USoundBase* LaunchSound;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta=(AllowPrivateAccess=true))
+	class USoundBase* HitSound;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
