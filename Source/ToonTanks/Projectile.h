@@ -39,6 +39,8 @@ private:
 	class USoundBase* LaunchSound;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta=(AllowPrivateAccess=true))
 	class USoundBase* HitSound;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta=(AllowPrivateAccess=true))
+	TSubclassOf<class UCameraShakeBase>  HitCameraShakeClass;
 
 public:
 	// Called every frame
