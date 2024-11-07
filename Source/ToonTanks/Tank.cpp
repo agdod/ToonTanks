@@ -60,6 +60,7 @@ void ATank::HandleDestruction()
 	UE_LOG(LogTemp, Display, TEXT("ATank::HandleDestruction"));
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	bAlive = false;
 }
 
 void ATank::BeginPlay()
